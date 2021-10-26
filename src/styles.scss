@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+html {
+  height: 100%;
+}
+
+body {
+  background-image: url('/static/landing/grid.svg');
+  background-color: black;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  overscroll-behavior: none;
+  margin: 0;
+  height: 100%;
+}
+
+/* Main landing page container. */
+.landing {
+  // Display
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* LA Hacks logo display. */
+.title-container {
+  margin-bottom: 4em;
+}
+
+/* Portion below LA Hacks logo. */
+.email-form {
+  // Display
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  // Font
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+
+  & #join-line {
+    text-align: center;
+    color: #d3d3d3;
+    font-weight: bold;
+    font-size: 1.75em;
+    margin: 0em 1.5em 0 1.5em;
+  }
+
+  & #sub-join-line {
+    text-align: center;
+    color: #999999;
+    font-weight: 500;
+    font-size: 1.25em;
+    margin: 1em 1.5em 0 1.52em;
+  }
+
+  /* Email input area. */
+  & > .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > .form {
+      // Display
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 32em;
+      margin: 0 1em 0 1em;
+
+      // Border
+      border-top: 0.125em solid transparent;
+      border-right: 0.125em solid transparent;
+      border-left: 0.125em solid transparent;
+      border-bottom: 0.125em solid transparent;
+
+      // Sizing
+      margin-top: 8.4vmin;
+      padding: 1.4vmin;
+
+      // Appearance
+      filter: brightness(0.5);
+
+      & > .chip {
+        // Display
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: black;
+        background-color: #999999;
+
+        // Sizing
+        border-radius: 0.25em;
+        padding: 0.1em 1em;
+        margin: 0.5em;
+        height: 2em;
+
+        & > .form-icon {
+          padding-left: 0.3em;
+        }
+      }
+
+      & > .form-email {
+        // Display
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        // Border
+        border-bottom: 0.125em solid #efefef;
+
+        & > #email-input {
+          background: transparent;
+          border: none;
+          font-weight: normal;
+          font-size: 1.25em;
+          font-family: 'Montserrat', 'sans serif';
+          line-height: 1.5em;
+          margin-left: 0.5em;
+          color: white;
+          padding: 0.2em;
+
+          &::placeholder {
+            color: white;
+          }
+
+          &:focus {
+            outline: none;
+
+            &::placeholder {
+              color: #999999;
+            }
+          }
+        }
+
+        & > img {
+          width: 1.5em;
+          height: auto;
+        }
+      }
+
+      &:hover {
+        filter: brightness(1);
+      }
+
+      &:focus-within {
+        border: 0.125em solid #efefef;
+        border-radius: 0.625em;
+      }
+    }
+
+    & > .chip {
+      display: inline-block;
+      border-radius: 0.25em;
+      background-color: #999999;
+      color: black;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      word-wrap: wrap;
+      margin: 1em;
+
+      & > .form-icon {
+        padding-left: 0.313em;
+      }
+
+      & > span {
+        padding: 1em;
+      }
+    }
+  }
+
+  & > #confirmed-box {
+    // Display
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(0.25turn, #C685D1, #8DC8E2);
+    border: 0.125em solid transparent;
+    border-radius: 0.625em;
+
+    // Sizing
+    margin-top: 5em;
+    padding: 1.25em;
+    width: 70%;
+
+    & > #confirmation-text {
+      font-size: 2.25vh;
+      font-weight: 900;
+      color: #0F131F;
+    }
+  }
+}
