@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { MutableRefObject, useRef, useState} from "react";
 import email_white_36dp from "../static/landing/email-white-36dp.svg"
 import check from "../static/landing/check.svg"
 import cross from "../static/landing/cross.svg"
@@ -6,13 +6,12 @@ import cross from "../static/landing/cross.svg"
 export const EmailForm = () => {
   const [mailChimpResponse, setMailChimpResponse] = useState("");
 
-  const addEmail = (event: any) => {
-    if(event.key !== 'Enter') {
-      return;
-    }
+  const emailInput = useRef() as MutableRefObject<HTMLInputElement>;
 
-    // @ts-ignore
-    const emailInput = document.getElementById("email-input").value;
+  const addEmail = (event: React.FormEvent<HTMLFormElement>) => {
+    /*if(event.key !== 'Enter') {
+      return;
+    }*/
 
     fetch('/v1/email', {
       method: 'POST',
@@ -37,11 +36,34 @@ export const EmailForm = () => {
         });
   }
 
+  
   return (
       <div className="email-form">
         <p id="join-line">Join 1000+ makers, innovators, and dreamers.</p>
         <p id="sub-join-line">Be the first to know when applications are live!</p>
 
+        <div className="form-container">
+          <div className="form">
+            <form onSubmit={(event) => addEmail(event)}>
+              <fieldset>
+                <label className="form-email">
+                  
+                  <img src={email_white_36dp} />
+
+                  <input
+                    id="email-input" 
+                    ref={emailInput}
+                    placeholder="Enter your email"
+                  />
+
+                </label>
+              </fieldset>
+            </form>
+          </div>
+
+        </div>
+        
+        {/*
         {mailChimpResponse !== "Confirmed" && (
             <div className="form-container">
               <div className="form">
@@ -75,6 +97,7 @@ export const EmailForm = () => {
               <span id="confirmation-text">Thanks, see you soon!</span>
             </div>
         )}
+        */}
       </div>
   );
 };
