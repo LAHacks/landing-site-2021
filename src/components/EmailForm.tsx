@@ -1,25 +1,29 @@
 import React, { MutableRefObject, useRef, useState} from "react";
 import email_white_36dp from "../static/landing/email-white-36dp.svg"
-import check from "../static/landing/check.svg"
-import cross from "../static/landing/cross.svg"
+//import check from "../static/landing/check.svg"
+//import cross from "../static/landing/cross.svg"
 
 export const EmailForm = () => {
   const [mailChimpResponse, setMailChimpResponse] = useState("");
 
   const emailInput = useRef() as MutableRefObject<HTMLInputElement>;
-
-  const addEmail = (event: React.FormEvent<HTMLFormElement>) => {
+  
+  const addEmail = (event: any) => {
     /*if(event.key !== 'Enter') {
       return;
     }*/
-
+    event.preventDefault()
+    
+    
+    const actualEmailInput = emailInput.current.value
+    console.log(actualEmailInput)
     fetch('/v1/email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email: emailInput,
+        email: actualEmailInput,
       }),
     }).then((res) => {
       return res.json();
@@ -48,7 +52,7 @@ export const EmailForm = () => {
               <fieldset>
                 <label className="form-email">
                   
-                  <img src={email_white_36dp} />
+                  <img src={email_white_36dp} alt="envelope"/>
 
                   <input
                     id="email-input" 
@@ -57,7 +61,8 @@ export const EmailForm = () => {
                   />
 
                 </label>
-              </fieldset>
+            </fieldset>
+            <button type="submit"> Submit :-) </button>
             </form>
           </div>
 
@@ -98,6 +103,6 @@ export const EmailForm = () => {
             </div>
         )}
         */}
-      </div>
+    </div>
   );
 };
