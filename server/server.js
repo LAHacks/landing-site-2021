@@ -1,49 +1,33 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
-const compression = require('compression');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const axios = require('axios');
+const express = require('express')
+const path = require('path')
+const compression = require('compression')
+const axios = require('axios')
+const morgan = require('morgan')
+const bodyParser = require('body-parser')
 
-const binpath = path.resolve(__dirname, 'bin');
+const PORT = process.env.PORT || 3000;
 
-const serveFile = (app, filename) => {
-  app.get('/' + filename, (req, res) => {
-    res.sendFile(filename, {
-      root: binpath,
-    });
-  });
-};
+const app = express();
+app.disable('x-powered-by');
+app.use(compression());
+app.use(morgan('dev'));
+const jsonParser = bodyParser.json()
 
-function start(port) {
-  const app = express();
-  app.disable('x-powered-by');
-  app.use(compression());
-  app.use(morgan('dev'));
-  app.use(bodyParser.urlencoded({
-    extended: true,
-  }));
-  app.use(bodyParser.json());
-  app.use(
-    '/static',
-    express.static('bin/static', {
-      fallthrough: false,
-      maxAge: 31536000000,
-    }),
-  );
+// Have Node serve the files for our built React app
+app.use(express.static(path.resolve(__dirname, '../build')));
 
-  const listid = process.env.MAILCHIMP_LISTID || '';
-  const datacenter = process.env.MAILCHIMP_DATACENTER || '';
-  const endpoint = `https://${datacenter}.api.mailchimp.com/3.0/lists/${listid}/members`;
-  const mailchimpKey = process.env.MAILCHIMP_KEY || '';
-  const auth =
-    'Basic' + new Buffer('anystring:' + mailchimpKey).toString('base64');
+const listid = process.env.MAILCHIMP_LISTID || '';
+const datacenter = process.env.MAILCHIMP_DATACENTER || '';
+const endpoint = `https://${datacenter}.api.mailchimp.com/3.0/lists/${listid}/members`;
+const mailchimpKey = process.env.MAILCHIMP_KEY || '';
+// Seems to be unused right now
+// const auth =
+//   'Basic' + new Buffer('anystring:' + mailchimpKey).toString('base64');
+const emailRe = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  app.post('/v1/email', async (req, res) => {
-    console.log("post function reached")
+app.post("/v1/email", jsonParser, async (req, res) => {
+  try {
     const email = req.body.email;
-    const emailRe = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (!email || !email.trim() || !emailRe.test(email)) {
       res.status(400).json({
@@ -84,9 +68,9 @@ function start(port) {
           success: false,
           message: 'Error',
           reason:
-          err.response.data.title == 'Invalid Resource'
-          ? err.response.data.detail
-          : err.response.data.title,
+            err.response.data.title === 'Invalid Resource'
+              ? err.response.data.detail
+              : err.response.data.title,
         };
         console.log(response);
       } else if (err.request) {
@@ -104,7 +88,6 @@ function start(port) {
           reason: 'there was a problem on our end',
         };
       }
-      //console.log(JSON.stringify(response))
       res.status(status).json(response);
       return;
     }
@@ -114,23 +97,20 @@ function start(port) {
       success: true,
       message: 'Confirmed',
     };
-    //console.log(JSON.stringify(response))
-    res.status(status).json(response);
 
-    return;
-  });
+    res.status(status).json(response).send();
+  }
+  catch (e) {
+    console.error(e)
+    res.status(500).send()
+  }
+});
 
-  // serveFile(app, 'manifest.json');
-  // serveFile(app, 'favicon.ico');
-  // app.get('*', (req, res) => {
-  //   res.sendFile('index.html', {
-  //     root: binpath,
-  //   });
-  // });
+// All other GET requests not handled before will return our React app
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+});
 
-  app.listen(port, () => {
-    console.log('Server is up and running!');
-  });
-}
-
-start(3030);
+app.listen(PORT, () => {
+  console.log(`Server listening on ${PORT}`);
+});
