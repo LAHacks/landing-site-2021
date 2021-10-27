@@ -41,6 +41,7 @@ function start(port) {
     'Basic' + new Buffer('anystring:' + mailchimpKey).toString('base64');
 
   app.post('/v1/email', async (req, res) => {
+    console.log("post function reached")
     const email = req.body.email;
     const emailRe = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -103,6 +104,7 @@ function start(port) {
           reason: 'there was a problem on our end',
         };
       }
+      //console.log(JSON.stringify(response))
       res.status(status).json(response);
       return;
     }
@@ -112,7 +114,7 @@ function start(port) {
       success: true,
       message: 'Confirmed',
     };
-
+    //console.log(JSON.stringify(response))
     res.status(status).json(response);
 
     return;

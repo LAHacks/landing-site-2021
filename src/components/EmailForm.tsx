@@ -21,16 +21,20 @@ export const EmailForm = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
       body: JSON.stringify({
         email: actualEmailInput,
       }),
     }).then((res) => {
+      console.log("first promise")
       return res.json();
     })
-        .then((json) => {
+      .then((json) => {
+          console.log("second promise reached")
           let response = "";
           response = json.message;
+          
           if (!json.success) {
             if (json.reason) {
               response += ': ' + json.reason;
@@ -48,7 +52,7 @@ export const EmailForm = () => {
 
         <div className="form-container">
           <div className="form">
-            <form onSubmit={(event) => addEmail(event)}>
+            <form onSubmit={addEmail}>
               <fieldset>
                 <label className="form-email">
                   
