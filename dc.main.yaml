@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:
+  app:
+    image: phoenix:latest
+    environment:
+      - MAILCHIMP_LISTID=${MAILCHIMP_LISTID}
+      - MAILCHIMP_DATACENTER=${MAILCHIMP_DATACENTER}
+      - MAILCHIMP_KEY=${MAILCHIMP_KEY}
+    volumes:
+      - ./bin:/app/bin
