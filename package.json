@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@craco/craco": "^6.4.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -16,9 +17,9 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts --max_old_space_size=4096 build",
-    "test": "react-scripts test",
+    "start": "craco start",
+    "build": "craco --max_old_space_size=512 build",
+    "test": "craco test",
     "preserve": "npm run build",
     "serve": "cd server && npm run serve",
     "eject": "react-scripts eject"
@@ -42,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react": "^17.0.33"
+    "@types/react": "^17.0.33",
+    "webpack-dashboard": "^3.3.6"
   }
 }
