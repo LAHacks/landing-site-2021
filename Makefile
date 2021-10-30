@@ -5,7 +5,7 @@ VERSION=v0.1.0
 BIN_DIR=build
 
 # DOCKER
-IMAGE_NAME=phoenix
+IMAGE_NAME=landing_site_2021
 
 .PHONY: all build clean-bin format
 
@@ -31,7 +31,7 @@ gen:
 	./servicedef-gen.sh
 
 ## docker
-DOCKER_IMAGE_NAME=phoenix
+DOCKER_IMAGE_NAME=landing_site_2021
 DOCKER_VERSION=v0.1.0
 DOCKER_FILE=./Dockerfile
 .PHONY: build-docker produp proddown
@@ -45,7 +45,7 @@ proddown:
 	docker-compose -f dc.main.yaml -f dc.compose.yaml down
 
 ## service
-SERVICE_STACK=phoenix
+SERVICE_STACK=landing_site_2021
 SERVICE_DEF_DIR=defs
 SERVICE_DEF_NAME=$(SERVICE_DEF_DIR)/dc.$(SERVICE_STACK).yaml
 .PHONY: service launch danger-land
