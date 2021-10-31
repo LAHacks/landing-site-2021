@@ -2,10 +2,10 @@ version: "3.7"
 
 services:
   app:
-    image: phoenix:latest
+    image: landing_site_2021:latest
     environment:
       - MAILCHIMP_LISTID=${MAILCHIMP_LISTID}
       - MAILCHIMP_DATACENTER=${MAILCHIMP_DATACENTER}
       - MAILCHIMP_KEY=${MAILCHIMP_KEY}
     volumes:
-      - ./bin:/app/bin
+      - ./build:/app/build

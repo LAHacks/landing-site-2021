@@ -10,7 +10,7 @@ services:
       replicas: 1
       labels:
         - 'traefik.enable=true'
-        - 'traefik.http.services.${SERVICE_NAME}-service.loadbalancer.server.port=3030'
+        - 'traefik.http.services.${SERVICE_NAME}-service.loadbalancer.server.port=3000'
         - 'traefik.http.routers.${SERVICE_NAME}.entrypoints=web'
         - 'traefik.http.routers.${SERVICE_NAME}.rule=Host(`lahacks.com`)'
         - 'traefik.http.middlewares.${SERVICE_NAME}-redirect.redirectscheme.scheme=https'
