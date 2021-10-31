@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 const jsonParser = bodyParser.json()
 
 // Have Node serve the files for our built React app
-app.use(express.static(path.resolve(__dirname, '../build')));
+app.use(express.static(path.resolve(__dirname, 'build')));
 
 const listid = process.env.MAILCHIMP_LISTID || '';
 const datacenter = process.env.MAILCHIMP_DATACENTER || '';
@@ -104,11 +104,6 @@ app.post("/v1/email", jsonParser, async (req, res) => {
     console.error(e)
     res.status(500).send()
   }
-});
-
-// All other GET requests not handled before will return our React app
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
 app.listen(PORT, () => {
