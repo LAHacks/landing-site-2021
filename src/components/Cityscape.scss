@@ -2,32 +2,47 @@
   position: relative;
   margin-top: auto;
   height: auto;
-  z-index: -1;
   overflow: hidden;
 
   > #LeftGrass {
+    position: relative;
     float: left;
     margin-top: 10vh;
     max-width: 40%;
-  }
-
-  > #City {
-    z-index: -2;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    top: 0;
-  }
-
-  @media only screen and (max-width: 1200px) {
-    > #City {
-      bottom: 0;
-    }
+    z-index: 2;
   }
 
   > #RightGrass {
     float: right;
     margin-top: 10vh;
     max-width: 40%;
+    z-index: 2;
+  }
+
+  > #City {
+    z-index: -2;
+    position: absolute;
+    left: 0;
+    min-width: 100%;
+    top: 0;
+
+    @media only screen and (max-width: 1400px) {
+      top: unset;
+      bottom: 0;
+    }
+
+    @media only screen and (max-width: 900px) {
+      width: 150%;
+    }
+
+    @media only screen and (max-width: 500px) {
+      width: 150%;
+    }
+  }
+
+  @media only screen and (max-width: 1400px) {
+    #RightGrass, #LeftGrass {
+      max-width: 50%;
+    }
   }
 }

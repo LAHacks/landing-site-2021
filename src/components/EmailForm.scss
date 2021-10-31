@@ -40,7 +40,7 @@
       align-items: center;
       justify-content: center;
       flex-wrap: wrap;
-      max-width: 32em;
+      max-width: 45em;
       margin: 0 1em 0 1em;
 
       // Border
@@ -54,7 +54,7 @@
       padding: 1.4vmin;
 
       // Appearance
-      filter: brightness(0.5);
+      filter: brightness(0.8);
 
 
       & > .form-email {
@@ -62,23 +62,15 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+        position: relative;
 
         // Border
         border-bottom: 0.125em solid #efefef;
 
         & > .chip {
-          // Display
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          color: blue;
-          //background-color: #999999;
-
-          // Sizing
-          //border-radius: 0.25em;
-          //padding: 0.1em 1em;
-          //margin: 0.5em;
-          //height: 2em;
+          position: absolute;
+          right: 0;
+          color: lightgrey;
 
           & > .form-icon {
             padding-left: 0.3em;

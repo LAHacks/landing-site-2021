@@ -1,10 +1,35 @@
 /* LA Hacks logo display. */
 .title-container {
-  margin-bottom: 4em;
+  margin: auto auto 4em;
   width: auto;
+  position: relative;
 
-  > img{
-    width: 30vw;
+  > #title {
+    width: 40vw;
+
+    @media only screen and (max-width: 1400px) {
+      width: 60vw;
+    }
+
+    @media only screen and (max-width: 900px) {
+      width: 80vw;
+    }
+  }
+
+  > #Moon {
+    position: absolute;
+    left: -38%;
+    top: -70%;
+    height: 250%;
+  }
+
+  > .stars {
+    position: absolute;
+
+    &.leftStars {
+      left: -25%;
+      bottom: -20%;
+    }
   }
 }
 
