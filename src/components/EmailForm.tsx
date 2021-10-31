@@ -1,6 +1,7 @@
 import React, {MutableRefObject, useRef, useState} from "react";
 import email_white_36dp from "../static/landing/email-white-36dp.svg"
 import cross from "../static/landing/cross.svg"
+import "./EmailForm.scss"
 
 export const EmailForm = () => {
   const [mailChimpResponse, setMailChimpResponse] = useState("");
@@ -9,24 +10,29 @@ export const EmailForm = () => {
   const addEmail = async (event: any) => {
     event.preventDefault()
 
-    const actualEmailInput = emailInput.current.value
-    const resp = await fetch('/v1/email', {
-      method: 'POST',
-      mode: "cors",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "email": actualEmailInput,
-      }),
-    })
+    try {
+      const actualEmailInput = emailInput.current.value
+      const resp = await fetch('/v1/email', {
+        method: 'POST',
+        mode: "cors",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          "email": actualEmailInput,
+        }),
+      })
 
-    const json = await resp.json()
-    // If success then the response should be the message, otherwise it
-    // should be the reason if it is give.
-    const response = json.success ? json.message : json.reason || "";
+      const json = await resp.json()
+      // If success then the response should be the message, otherwise it
+      // should be the reason if it is give.
+      const response = json.success ? json.message : json.reason || "";
 
-    setMailChimpResponse(response);
+      setMailChimpResponse(response);
+
+    } catch (e) {
+      setMailChimpResponse("Invalid Email")
+    }
   }
   const userErrorFiller = () => {
     if (mailChimpResponse === "Invalid email") {
@@ -52,29 +58,19 @@ export const EmailForm = () => {
     } else {
       return (
           <div className="form-container">
-            <div className="form">
-              <div className="form-email">
-                <form onSubmit={addEmail}>
-
-                  <label className="form-email">
-
-                    <img src={email_white_36dp} alt="envelope"/>
-
-                    <input
-                        id="email-input"
-                        ref={emailInput}
-                        placeholder="Enter your email"
-                    />
-                    {userErrorFiller()}
-                  </label>
-
-
-                  <button type="submit"> Submit :-)</button>
-                </form>
-              </div>
-
-            </div>
-          </div>);
+            <form onSubmit={addEmail} className="form">
+              <label className="form-email">
+                <img src={email_white_36dp} alt="envelope"/>
+                <input
+                    id="email-input"
+                    ref={emailInput}
+                    placeholder="Enter your email"
+                />
+                {userErrorFiller()}
+              </label>
+            </form>
+          </div>
+      );
     }
   }
   return (

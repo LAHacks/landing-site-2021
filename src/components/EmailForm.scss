@@ -1,36 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-html {
-  height: 100%;
-}
-
-body {
-  background-image: url('/static/landing/grid.svg');
-  background-color: black;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  overscroll-behavior: none;
-  margin: 0;
-  height: 100%;
-}
-
-/* Main landing page container. */
-.landing {
-  // Display
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-}
-
-/* LA Hacks logo display. */
-.title-container {
-  margin-bottom: 4em;
-}
-
 /* Portion below LA Hacks logo. */
 .email-form {
   // Display
@@ -87,24 +56,6 @@ body {
       // Appearance
       filter: brightness(0.5);
 
-      & > .chip {
-        // Display
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        color: black;
-        background-color: #999999;
-
-        // Sizing
-        border-radius: 0.25em;
-        padding: 0.1em 1em;
-        margin: 0.5em;
-        height: 2em;
-
-        & > .form-icon {
-          padding-left: 0.3em;
-        }
-      }
 
       & > .form-email {
         // Display
@@ -114,6 +65,26 @@ body {
 
         // Border
         border-bottom: 0.125em solid #efefef;
+
+        & > .chip {
+          // Display
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          color: blue;
+          //background-color: #999999;
+
+          // Sizing
+          //border-radius: 0.25em;
+          //padding: 0.1em 1em;
+          //margin: 0.5em;
+          //height: 2em;
+
+          & > .form-icon {
+            padding-left: 0.3em;
+          }
+        }
+
 
         & > #email-input {
           background: transparent;

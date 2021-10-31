@@ -1,6 +1,7 @@
 import React  from 'react';
 import title300 from "../static/landing/title-300w.svg"
 import title700 from "../static/landing/title-700w.svg"
+import "./Title.scss"
 
 export const Title = () => {
   return (
