@@ -13,7 +13,7 @@
     max-width: 30vw;
 
     @media only screen and (max-width: 900px) {
-      display: none;
+      max-width: 45vw;
     }
   }
 

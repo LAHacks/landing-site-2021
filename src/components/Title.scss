@@ -21,6 +21,10 @@
     left: -38%;
     top: -87%;
     height: 250%;
+
+    @media only screen and (max-width: 900px) {
+      display: none;
+    }
   }
 
   > .stars {
@@ -29,6 +33,21 @@
     &.leftStars {
       left: -25%;
       bottom: -20%;
+    }
+
+    @media only screen and (max-width: 900px) {
+      &.leftStars {
+        width: 20%;
+        right: -10%;
+        left: unset;
+        top: -40%;
+      }
+
+      &.rightStars {
+        width: 20%;
+        left: -10%;
+        bottom: -110%;
+      }
     }
   }
 }
