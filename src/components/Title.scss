@@ -21,6 +21,7 @@
     left: -38%;
     top: -87%;
     height: 250%;
+    z-index: -1;
 
     @media only screen and (max-width: 900px) {
       display: none;
